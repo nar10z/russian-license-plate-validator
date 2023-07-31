@@ -22,9 +22,7 @@ func NewLicense(license string) (License, error) {
 		return License{}, ErrInvalidLicense
 	}
 
-	l := License{
-		original: license,
-	}
+	l := License{}
 
 	switch {
 	case reAuto.MatchString(license):
@@ -35,6 +33,7 @@ func NewLicense(license string) (License, error) {
 			return l, ErrInvalidLicense
 		}
 
+		l.original = strings.Join(sub[1:], "")
 		l.series = sub[1] + " " + sub[3]
 		l.registerNumber = sub[2]
 		l.regionCode = sub[4]
@@ -47,6 +46,7 @@ func NewLicense(license string) (License, error) {
 			return l, ErrInvalidLicense
 		}
 
+		l.original = strings.Join(sub[1:], "")
 		l.series = sub[1]
 		l.registerNumber = sub[2]
 		l.regionCode = sub[3]
@@ -59,6 +59,7 @@ func NewLicense(license string) (License, error) {
 			return l, ErrInvalidLicense
 		}
 
+		l.original = strings.Join(sub[1:], "")
 		l.series = sub[2]
 		l.registerNumber = sub[1]
 		l.regionCode = sub[3]
@@ -71,6 +72,7 @@ func NewLicense(license string) (License, error) {
 			return l, ErrInvalidLicense
 		}
 
+		l.original = strings.Join(sub[1:], "")
 		l.series = sub[1] + " " + sub[3]
 		l.registerNumber = sub[2]
 		l.regionCode = sub[4]
