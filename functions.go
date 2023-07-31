@@ -1,6 +1,9 @@
 package russian_license_plate_validator
 
-import "regexp"
+import (
+	"regexp"
+	"strings"
+)
 
 func ValidateLicense(license string) bool {
 	return ValidateLicenseByType(license, Auto) ||
@@ -14,6 +17,8 @@ func ValidateLicenseByType(license string, t Type) bool {
 	if re == nil {
 		return false
 	}
+
+	license = strings.ToUpper(license)
 
 	return re.MatchString(license)
 }

@@ -1,6 +1,9 @@
 package russian_license_plate_validator
 
-import "regexp"
+import (
+	"regexp"
+	"strings"
+)
 
 const minLicenseSymbols = 7
 
@@ -12,6 +15,9 @@ var (
 )
 
 func NewLicense(license string) (License, error) {
+	license = strings.TrimSpace(license)
+	license = strings.ToUpper(license)
+
 	if len(license) < minLicenseSymbols {
 		return License{}, ErrInvalidLicense
 	}
